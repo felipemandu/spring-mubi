@@ -1,11 +1,17 @@
 package br.com.alura.springmvc.mubi.controller;
 
+import javax.validation.constraints.NotBlank;
+
 import br.com.alura.springmvc.mubi.domain.Pedido;
+
 
 public class PedidoDto {
 
+	@NotBlank
 	private String nomeProduto;
+	@NotBlank
 	private String urlImagem;
+	@NotBlank
 	private String urlProduto;
 	private String descricaoProduto;
 
