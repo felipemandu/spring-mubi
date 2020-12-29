@@ -29,7 +29,7 @@ public class PedidoController {
 			return "pedido/formulario";
 		}
 		pedidoRepository.save(pedidoDto.toPedido());
-		return "pedido/formulario";
+		return "redirect:/home";
 	}
 
 }

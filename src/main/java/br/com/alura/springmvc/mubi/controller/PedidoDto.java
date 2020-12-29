@@ -3,6 +3,7 @@ package br.com.alura.springmvc.mubi.controller;
 import javax.validation.constraints.NotBlank;
 
 import br.com.alura.springmvc.mubi.domain.Pedido;
+import br.com.alura.springmvc.mubi.domain.StatusPedido;
 
 
 public class PedidoDto {
@@ -53,6 +54,7 @@ public class PedidoDto {
 		pedido.setUrlImagem(urlImagem);
 		pedido.setUrlProduto(urlProduto);
 		pedido.setDescricao(descricaoProduto);
+		pedido.setStatus(StatusPedido.AGUARDANDO);
 		return pedido;
 	}
 
