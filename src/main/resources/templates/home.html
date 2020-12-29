@@ -12,7 +12,7 @@
 				<a th:classappend="${status} == aprovado ? 'active'" class="nav-item nav-link" href="/home/aprovado">Aprovado</a>
 				<a th:classappend="${status} == entregue ? 'active'" class="nav-item nav-link" href="/home/entregue">Entregue</a>
 			</div>
-			<a href="pedido/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0" >Novo</button></a>
+			<a href="/pedido/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0" >Novo</button></a>
 		</nav>
 		
 		<div class="card mb-3" th:each="pedido : ${pedidos}">
@@ -26,10 +26,10 @@
 					<div class="col-12 col-sm-9 mb-3">
 						<div class="row">
 							<div class="col-md-7">
-								Valor: R$<span th:text="${pedido.valorNegociado}">200.00</span>
+								Valor: <span th:if="${pedido.valorNegociado} != null" th:text="${'R$' + #numbers.formatDecimal(pedido.valorNegociado, 3, 'POINT', 2, 'COMMA')}">200.00</span>
 							</div>
 							<div class="col-md-5">
-								Data da entrada: <span th:text="${pedido.dataEntrega}">10/02/2020</span>
+								Data da entrada: <span th:text="${#temporals.format(pedido.dataEntrega, 'dd/MM/yyyy')}">10/02/2020</span>
 							</div>
 						</div>
 
