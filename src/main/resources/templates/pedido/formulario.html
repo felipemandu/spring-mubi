@@ -7,7 +7,7 @@
 		<div th:replace="~{base :: titulo('Novo Pedido')}"></div>
 
 		<form th:object="${pedidoDto}" class="card p-3 my-3"
-			action="/pedido/novo" method="post">
+			action="@{/pedido/novo}" method="post">
 
 			<div class="form-group pb-2">
 				<label for="nomeProduto">Produto</label> <input

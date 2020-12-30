@@ -1,5 +1,6 @@
 package br.com.alura.springmvc.mubi.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +23,15 @@ public class HomeController {
 	private PedidoRepository pedidoRepository;
 	
 	@GetMapping
-	public String hello(Model model) {
-		model.addAttribute("pedidos", pedidoRepository.findAll());
+	public String hello(Model model, Principal principal) {
+		model.addAttribute("pedidos", pedidoRepository.findAllByUser(principal.getName()));
 		return "home";
 	}
 	
 	@GetMapping("/{status}")
-	public String status(@PathVariable("status") String status, Model model) {
+	public String status(@PathVariable("status") String status, Model model, Principal principal) {
 		StatusPedido statusPedido = Enum.valueOf(StatusPedido.class, status.toUpperCase());
-		List<Pedido> pedidos = pedidoRepository.findByStatus(statusPedido);
+		List<Pedido> pedidos = pedidoRepository.findByUserAndStatus(principal.getName(), statusPedido);
 		model.addAttribute("pedidos", pedidos);
 		return "home";
 	}
