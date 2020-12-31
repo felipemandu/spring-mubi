@@ -23,7 +23,6 @@ public class PedidoController {
 
 	private UserRepository userRepository;
 	
-	
 	@Autowired
 	public PedidoController(PedidoRepository pedidoRepository, UserRepository userRepository) {
 		this.pedidoRepository = pedidoRepository;

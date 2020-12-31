@@ -30,9 +30,16 @@
 		class="text-light" sec:authorize="isAuthenticated()" href="#"> Logout</a>
 		<form id="form-logout" th:action="@{/logout}" method="post"></form>
 	</span>
+	
 </div>
 
-<div th:fragment="titulo(valor)" class="jumbotron p-5 mb-0 bg-dark text-light">
-	<h1 class="display-4"  th:text="${valor}"></h1>
+<div th:fragment="menu" class="p-3 ">
+	<span>
+		<a class="text-decoration-none mr-3" href="/home">Últimos Pedidos</a>
+		<a class="text-decoration-none mr-3" href="/usuario/home"> Meus Pedidos</a>
+	</span>	
+</div>
 
+<div th:fragment="titulo(valor)" class="jumbotron p-5 mt-3 mb-0 bg-dark text-light">
+	<h1 class="display-4"  th:text="${valor}"></h1>
 </div>

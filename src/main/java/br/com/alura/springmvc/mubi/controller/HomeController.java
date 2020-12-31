@@ -1,17 +1,14 @@
 package br.com.alura.springmvc.mubi.controller;
 
-import java.security.Principal;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.alura.springmvc.mubi.domain.Pedido;
 import br.com.alura.springmvc.mubi.domain.StatusPedido;
 import br.com.alura.springmvc.mubi.repository.PedidoRepository;
 
@@ -19,26 +16,24 @@ import br.com.alura.springmvc.mubi.repository.PedidoRepository;
 @RequestMapping("/home")
 public class HomeController {
 	
-	@Autowired
 	private PedidoRepository pedidoRepository;
-	
+
+	@Autowired
+	public HomeController(PedidoRepository pedidoRepository) {
+		this.pedidoRepository = pedidoRepository;
+	}
+
 	@GetMapping
-	public String hello(Model model, Principal principal) {
-		model.addAttribute("pedidos", pedidoRepository.findAllByUser(principal.getName()));
+	public String pedidoEntregues(Model model) {
+		Sort sort = Sort.by(Direction.ASC, "dataEntrega");
+		PageRequest pageRequest = PageRequest.of(0, 10, sort);
+		
+		StatusPedido entregue = StatusPedido.ENTREGUE;
+		
+		model.addAttribute("pedidos", pedidoRepository.findByStatus(entregue, pageRequest));
 		return "home";
 	}
 	
-	@GetMapping("/{status}")
-	public String status(@PathVariable("status") String status, Model model, Principal principal) {
-		StatusPedido statusPedido = Enum.valueOf(StatusPedido.class, status.toUpperCase());
-		List<Pedido> pedidos = pedidoRepository.findByUserAndStatus(principal.getName(), statusPedido);
-		model.addAttribute("pedidos", pedidos);
-		return "home";
-	}
-	
-	@ExceptionHandler(IllegalArgumentException.class)
-	public String onError() {
-		return "redirect:/home";
-	}
+
 
 }
