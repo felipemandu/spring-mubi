@@ -2,6 +2,8 @@ package br.com.alura.springmvc.mubi.api;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +27,7 @@ public class OfertaRest {
 	}
 	
 	@PostMapping
-	public Oferta criaOferta(@RequestBody OfertaDto ofertaDto) {
+	public Oferta criaOferta(@Valid @RequestBody OfertaDto ofertaDto) {
 		Long pedidoId = Long.parseLong(ofertaDto.getPedidoId());
 		Optional<Pedido> pedidoInDb = pedidoRepository.findById(pedidoId);
 		if(pedidoInDb.isEmpty()) {
