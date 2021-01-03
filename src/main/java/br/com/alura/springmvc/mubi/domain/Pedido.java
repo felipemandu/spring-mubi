@@ -2,7 +2,6 @@ package br.com.alura.springmvc.mubi.domain;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -45,9 +44,26 @@ public class Pedido {
 	@JsonIgnore
 	private User user;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
-	private List<Oferta> ofertas = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", fetch = FetchType.LAZY)
+	private List<Oferta> oferta;
 	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	
+	public List<Oferta> getOferta() {
+		return oferta;
+	}
+
+	public void setOferta(List<Oferta> oferta) {
+		this.oferta = oferta;
+	}
+
 	public String getNomeProduto() {
 		return nomeProduto;
 	}
@@ -113,7 +129,7 @@ public class Pedido {
 	}
 
 	public void addOferta(Oferta oferta) {
-		this.ofertas.add(oferta);
+		this.oferta.add(oferta);
 	}
 
 }

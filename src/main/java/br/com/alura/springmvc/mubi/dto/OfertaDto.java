@@ -12,7 +12,7 @@ public class OfertaDto {
 
 	private String valor;
 
-	private String dataDaEntregua;
+	private String dataDaEntrega;
 
 	private String comentarios;
 
@@ -32,12 +32,12 @@ public class OfertaDto {
 		this.valor = valor;
 	}
 
-	public String getDataDaEntregua() {
-		return dataDaEntregua;
+	public String getDataDaEntrega() {
+		return dataDaEntrega;
 	}
 
-	public void setDataDaEntregua(String dataDaEntregua) {
-		this.dataDaEntregua = dataDaEntregua;
+	public void setDataDaEntrega(String dataDaEntregua) {
+		this.dataDaEntrega = dataDaEntregua;
 	}
 
 	public String getComentarios() {
@@ -52,7 +52,7 @@ public class OfertaDto {
 		Oferta oferta = new Oferta();
 		oferta.setValor(new BigDecimal(valor));
 		oferta.setComentarios(comentarios);
-		oferta.setDataDaEntregua(LocalDate.parse(dataDaEntregua, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		oferta.setDataDaEntrega(LocalDate.parse(dataDaEntrega, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 		return oferta;
 	}
 

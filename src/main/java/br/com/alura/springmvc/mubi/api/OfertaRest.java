@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class OfertaRest {
 	}
 	
 	@PostMapping
-	public Oferta criaOferta(OfertaDto ofertaDto) {
+	public Oferta criaOferta(@RequestBody OfertaDto ofertaDto) {
 		Long pedidoId = Long.parseLong(ofertaDto.getPedidoId());
 		Optional<Pedido> pedidoInDb = pedidoRepository.findById(pedidoId);
 		if(pedidoInDb.isEmpty()) {

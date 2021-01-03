@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Oferta {
 
@@ -19,11 +21,12 @@ public class Oferta {
 
 	private BigDecimal valor;
 
-	private LocalDate dataDaEntregua;
+	private LocalDate dataDaEntrega;
 
 	private String comentarios;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Pedido pedido;
 
 	public Long getId() {
@@ -42,12 +45,12 @@ public class Oferta {
 		this.valor = valor;
 	}
 
-	public LocalDate getDataDaEntregua() {
-		return dataDaEntregua;
+	public LocalDate getDataDaEntrega() {
+		return dataDaEntrega;
 	}
 
-	public void setDataDaEntregua(LocalDate dataDaEntregua) {
-		this.dataDaEntregua = dataDaEntregua;
+	public void setDataDaEntrega(LocalDate dataDaEntrega) {
+		this.dataDaEntrega = dataDaEntrega;
 	}
 
 	public String getComentarios() {

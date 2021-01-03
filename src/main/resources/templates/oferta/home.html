@@ -22,13 +22,14 @@
 						</div>
 						<div class="row">
 							<div class="col-md-7">Valor:<input class="form-control" v-model="pedido.valorNegociado"/></div>
-							<div class="col-md-5">Data da entrada:<input class="form-control" v-model="pedido.dataDaEntregua"/></div>
+							<div class="col-md-5">Data da entrega:<input class="form-control" v-model="pedido.dataDaEntrega"/></div>
 						</div>
 						<div>
 							<label>Comentário</label>
-							<textarea class="form-control" v-model="pedido.comentario" ></textarea>
+							<textarea class="form-control" v-model="pedido.comentarios" ></textarea>
 						</div>
-						<button v-on:click="enviarOferta(pedido)" class="btn btn-primary mt-3">Enviar Oferta</button>
+						<button v-if="pedido.ofertaEnviada" class="btn btn-success mt-3">Oferta Enviada</button>
+						<button v-else v-on:click="enviarOferta(pedido)" class="btn btn-primary mt-3">Enviar Oferta</button>
 						
 					</div>
 					<div class="col-12 col-sm-3">
@@ -53,11 +54,21 @@
 			  mounted () {
 			    axios
 			      .get('http://localhost:8080/api/pedidos/entregue')
-			      .then(response => (this.pedidos = response.data))
+			      .then(response => {
+			      	response.data.forEach(pedido => pedido.ofertaEnviada = false);
+			      	this.pedidos = response.data;
+			      	})
 			  },
 			  methods: {
 			  	enviarOferta: function (pedido) {
-			  		console.log(pedido);
+			  		axios
+			  		.post('http://localhost:8080/api/oferta', {
+			  			pedidoId: pedido.id,
+			  			valor: pedido.valorNegociado,
+			  			dataDaEntrega: pedido.dataDaEntrega,
+			  			comentarios: pedido.comentarios
+			  		})
+			  		.then(response => pedido.ofertaEnviada = true)
 			  	}
 			  }
 			});
