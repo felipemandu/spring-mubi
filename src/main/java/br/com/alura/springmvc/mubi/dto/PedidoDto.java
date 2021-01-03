@@ -1,4 +1,4 @@
-package br.com.alura.springmvc.mubi.controller;
+package br.com.alura.springmvc.mubi.dto;
 
 import javax.validation.constraints.NotBlank;
 

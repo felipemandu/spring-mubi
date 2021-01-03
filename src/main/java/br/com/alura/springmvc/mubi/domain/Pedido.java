@@ -2,7 +2,10 @@ package br.com.alura.springmvc.mubi.domain;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +15,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Pedido {
@@ -36,8 +42,12 @@ public class Pedido {
 	private StatusPedido status;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	private User user;
-
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
+	private List<Oferta> ofertas = new ArrayList<>();
+	
 	public String getNomeProduto() {
 		return nomeProduto;
 	}
@@ -100,6 +110,10 @@ public class Pedido {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public void addOferta(Oferta oferta) {
+		this.ofertas.add(oferta);
 	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.alura.springmvc.mubi.domain.Pedido;
 import br.com.alura.springmvc.mubi.domain.User;
+import br.com.alura.springmvc.mubi.dto.PedidoDto;
 import br.com.alura.springmvc.mubi.repository.PedidoRepository;
 import br.com.alura.springmvc.mubi.repository.UserRepository;
 
